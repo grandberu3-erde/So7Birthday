@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/jpeg" href="/images/favico1.jpeg">
+<title>🎉 Intro - Page </title>
+
+<style>
+html, body {
+    margin: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background: black;
+    font-family: Arial, sans-serif;
+}
+
+#main-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    background: black;
+    transition: background-color 3s ease;
+}
+
+/* ================= SENTER ================= */
+#main-container.dark-mode::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 20;
+    pointer-events: none;
+    background: radial-gradient(
+        circle at var(--spot-x) var(--spot-y),
+        rgba(255,240,180,0.45) 0px,
+        rgba(0,0,0,0.97) 420px
+    );
+}
+
+/* ================= BIRTHDAY ================= */
+#main-container.birthday-mode {
+    background-color: #FFC0CB;
+}
+#main-container.birthday-mode::before {
+    display: none;
+}
+
+/* ================= CAKE ================= */
+.cake {
+    position: absolute;
+    left: 50%;
+    top: 48%;
+    transform: translate(-50%, -50%);
+    width: 320px;
+    height: 260px;
+    z-index: 5;
+    opacity: 0;
+}
+
+.cake.lit {
+    opacity: 1;
+    filter: brightness(1.12) drop-shadow(0 0 45px rgba(255,230,150,0.95));
+}
+
+/* ===== LAYER ===== */
+.layer {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    border-radius: 28px;
+    overflow: hidden;
+}
+
+
+/* ===== BOTTOM ===== */
+.layer.bottom {
+    width: 320px;
+    height: 130px;
+    bottom: 0;
+    background:
+        linear-gradient(
+            180deg,
+            #ffffff 0%,
+            #f2f2f2 40%,
+            #e6e6e6 70%,
+            #d9d9d9 100%
+        );
+    box-shadow:
+        inset 0 -18px 30px rgba(0,0,0,0.35),
+        inset 0 8px 15px rgba(255,255,255,0.5),
+        0 18px 28px rgba(0,0,0,0.5);
+}
+
+/* ===== MIDDLE ===== */
+.layer.middle {
+    width: 230px;
+    height: 140px;
+    bottom: 110px;
+    background:
+        linear-gradient(
+            180deg,
+            #ffffff 0%,
+            #f5f5f5 45%,
+            #eaeaea 75%,
+            #dcdcdc 100%
+        );
+    box-shadow:
+        inset 0 -14px 26px rgba(0,0,0,0.35),
+        inset 0 8px 15px rgba(255,255,255,0.45),
+        0 16px 26px rgba(0,0,0,0.45);
+}
+
+
+/* ===== ICING ===== */
+.icing {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 32px;
+    background:
+        linear-gradient(
+            180deg,
+            #ffd1d8 0%,
+            #ffb6c1 50%,
+            #f29aa0 100%
+        );
+    border-radius: 28px 28px 18px 18px;
+    box-shadow:
+        inset 0 6px 10px rgba(255,255,255,0.6),
+        inset 0 -6px 10px rgba(0,0,0,0.25);
+}
+
+/* drip */
+.icing::after {
+    content: "";
+    position: absolute;
+    top: 26px;
+    width: 100%;
+    height: 50px;
+    background:
+        radial-gradient(circle at 10% 0, #f29aa0 38%, transparent 39%),
+        radial-gradient(circle at 25% 0, #ffb6c1 32%, transparent 33%),
+        radial-gradient(circle at 40% 0, #f29aa0 45%, transparent 46%),
+        radial-gradient(circle at 55% 0, #ffb6c1 35%, transparent 36%),
+        radial-gradient(circle at 70% 0, #f29aa0 42%, transparent 43%),
+        radial-gradient(circle at 85% 0, #ffb6c1 30%, transparent 31%);
+}
+
+
+
+/* ================= CANDLES ================= */
+.candles {
+    position: absolute;
+    top: -30px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    z-index: 10;
+}
+
+.candle-number {
+    position: relative;
+    top: -12px;
+    font-size: 36px;
+    font-weight: 900;
+    color: white;
+    font-family: 'Arial Black', sans-serif;
+    text-shadow:
+        0 0 12px #ff0000,
+        0 0 20px #ff5555,
+        2px 2px 4px rgba(0,0,0,0.8);
+}
+
+.candle-group {
+    position: relative;
+    transform: translateY(-28px);
+}
+
+.candle {
+    width: 20px;
+    height: 72px;
+    border-radius: 6px;
+    background:
+        repeating-linear-gradient(
+            to bottom,
+            #ffb6c1 0px,
+            #ffb6c1 10px,
+            #ffffff 10px,
+            #ffffff 12px
+        );
+}
+
+.flame {
+    position: absolute;
+    top: -32px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 18px;
+    height: 30px;
+    background: radial-gradient(circle at 50% 60%, #fffacd, #ffd700 35%, #ff8c00 65%, #ff4500);
+    border-radius: 50% 50% 40% 40%;
+    animation: flameMove 0.15s infinite alternate;
+}
+
+.confetti {
+    position: fixed;
+    top: -10px;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    animation: fall linear infinite;
+    z-index: 999;
+}
+
+.birthday-text {
+   position: absolute;
+   left: 50%;
+   top: -10%; /* Posisi di atas kue */
+   transform: translateX(-50%) scale(0); /* Mulai dari kecil */
+   z-index: 50;
+   pointer-events: none;
+   width: 400px; /* Ukuran gambar disesuaikan */
+   height: auto;
+   opacity: 0; /* Mulai dengan tidak terlihat */
+}
+
+.birthday-text.show {   transition: transform 2s ease-out, opacity 1s ease-out; /* Animasi 1 detik ease-out */
+   transform: translateX(-50%) scale(1.2); /* Tampil penuh */
+   opacity: 1;
+}
+
+.message {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%) scale(0);
+    font-family: monospace;
+    opacity: 0;
+    text-align: center;
+
+    background: linear-gradient(90deg, #00ff00, #32cd32, #008000); /* variasi hijau */
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.message.small {
+    bottom: 10%; /* posisi di bawah kue */
+    font-size: 20px; /* kecil */
+}
+
+.message.big {
+    bottom: 5%; /* lebih bawah */
+    font-size: 100px; /* ukuran normal */
+}
+
+#blackOverlay {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    background: black;
+    border-radius: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    z-index: 9999;
+    pointer-events: none;
+    transition: width 1.5s ease-in, height 1.5s ease-in, transform 1.5s ease-in;
+}
+
+/* Animasi membesar lalu mengecil */
+@keyframes popScale {
+    0% { transform: translateX(-50%) scale(0); opacity: 0; }
+    30% { transform: translateX(-50%) scale(4); opacity: 1; }
+    100% { transform: translateX(-50%) scale(1); opacity: 1; }
+}
+
+/* Kelas untuk memicu animasi */
+.showMessage {
+    animation: popScale 1.5s ease forwards;
+}
+
+@keyframes fall {
+    to {
+        transform: translateY(110vh) rotate(360deg);
+    }
+}
+
+@keyframes flameMove {
+    from { transform: translateX(-50%) scale(1) rotate(-1deg); }
+    to { transform: translateX(-50%) scale(1.15) rotate(1deg); }
+}
+</style>
+</head>
+
+<body>
+
+<div id="main-container" class="dark-mode">
+    <img class="birthday-text" id="birthdayText" src="/images/image-removebg-preview.png" alt="HBD SHEYLA"/>
+    <div class="cake" id="cake">
+        <div class="candles">
+            <div class="candle-group">
+                <div class="candle"><div class="flame"></div></div>
+            </div>
+            <div class="candle-number">16</div>
+            <div class="candle-group">
+                <div class="candle"><div class="flame"></div></div>
+            </div>
+        </div>
+
+        <div class="layer middle"><div class="icing"></div></div>
+        <div class="layer bottom"><div class="icing"></div></div>
+    </div>
+    <div class="message small" id="message1">(click the candle)</div>
+    <div class="message big" id="message2">Sehat sehat orang sehat, Baik baik orang baik</div>
+    <div id="blackOverlay"></div>
+</div>
+
+<script>
+const container = document.getElementById("main-container");
+const cake = document.getElementById("cake");
+const birthdayText = document.getElementById("birthdayText");
+const candleFlames = document.querySelectorAll(".flame");
+const candleNumber = document.querySelector(".candle-number");
+
+const path = [
+    { x: 10, y: 10 },
+    { x: 90, y: 10 },
+    { x: 90, y: 90 },
+    { x: 10, y: 90 },
+    { x: 50, y: 50 }
+];
+
+let x = path[0].x;
+let y = path[0].y;
+
+// ================== FUNGSI KAMERA ==================
+function updateCakeVisibility() {
+    const r = cake.getBoundingClientRect();
+    const cx = r.left + r.width / 2;
+    const cy = r.top + r.height / 2;
+    const sx = (x / 100) * innerWidth;
+    const sy = (y / 100) * innerHeight;
+    cake.style.opacity = Math.max(0, 1 - Math.hypot(cx - sx, cy - sy) / 420);
+}
+
+function moveTo(target, duration = 2000) {
+    return new Promise(resolve => {
+        const sx = x, sy = y;
+        const start = performance.now();
+        function step(t) {
+            const p = Math.min((t - start) / duration, 1);
+            const e = p < 0.5 ? 2*p*p : 1 - Math.pow(-2*p+2,2)/2;
+            x = sx + (target.x - sx) * e;
+            y = sy + (target.y - sy) * e;
+            container.style.setProperty("--spot-x", x+"%");
+            container.style.setProperty("--spot-y", y+"%");
+            updateCakeVisibility();
+            p < 1 ? requestAnimationFrame(step) : resolve();
+        }
+        requestAnimationFrame(step);
+    });
+}
+
+// ================== CONFETTI ==================
+let confettiInterval;
+function startConfetti() {
+    const colors = ["#ff0","#f0f","#0ff","#f00","#0f0","#00f","#fff"];
+    confettiInterval = setInterval(() => {
+        for (let i = 0; i < 8; i++) {
+            const c = document.createElement("div");
+            c.className = "confetti";
+            c.style.backgroundColor = colors[Math.random() * colors.length | 0];
+            c.style.left = Math.random() * 100 + "vw";
+            c.style.animationDuration = 2 + Math.random() * 3 + "s";
+            document.body.appendChild(c);
+            setTimeout(() => c.remove(), 6000);
+        }
+    }, 120);
+    setTimeout(() => clearInterval(confettiInterval), 15000);
+}
+
+// ================== TEKS ==================
+function showExtraTexts() {
+    const smallText = document.createElement("div");
+    smallText.textContent = "(🕯️click the candle🕯️)";
+    smallText.style.position = "absolute";
+    smallText.style.left = "50%";
+    smallText.style.top = "62%";
+    smallText.style.transform = "translateX(-50%) scale(0)";
+    smallText.style.color = "red";
+    smallText.style.fontFamily = "monospace";
+    smallText.style.fontSize = "24px";
+    smallText.style.opacity = "0";
+    smallText.style.zIndex = "100";
+    container.appendChild(smallText);
+
+    const bigText = document.createElement("div");
+    bigText.textContent = "✨Sehat Sehat Orang Sehat, Baik Baik Orang Baik✨";
+    bigText.style.position = "absolute";
+    bigText.style.left = "50%";
+    bigText.style.top = "70%";
+    bigText.style.transform = "translateX(-50%) scale(0)";
+    bigText.style.fontFamily = "monospace";
+    bigText.style.background = "linear-gradient(90deg, #00ff00, #32cd32, #008000)";
+    bigText.style.webkitBackgroundClip = "text";
+    bigText.style.webkitTextFillColor = "transparent";
+    bigText.style.fontSize = "36px";
+    bigText.style.whiteSpace = "nowrap";
+    bigText.style.opacity = "0";
+    bigText.style.zIndex = "100";
+    container.appendChild(bigText);
+
+    setTimeout(() => {
+        smallText.style.transition = "transform 0.6s ease-out, opacity 0.6s ease-out";
+        smallText.style.transform = "translateX(-50%) scale(1)";
+        smallText.style.opacity = "1";
+
+        bigText.style.transition = "transform 1s ease-out, opacity 1s ease-out";
+        bigText.style.transform = "translateX(-50%) scale(1.5)";
+        bigText.style.opacity = "1";
+
+        setTimeout(() => {
+            bigText.style.transition = "transform 0.8s ease-in";
+            bigText.style.transform = "translateX(-50%) scale(1)";
+        }, 1000);
+    }, 200);
+}
+
+// ================== ANIMASI AWAL ==================
+(async ()=>{
+    for (let i=1;i<path.length;i++) await moveTo(path[i]);
+    cake.classList.add("lit");
+    await new Promise(r=>setTimeout(r,3000));
+    container.classList.replace("dark-mode","birthday-mode");
+    startConfetti();
+    birthdayText.classList.add("show");
+    showExtraTexts();
+})();
+
+// ================== KLIK LILIN ==================
+function blowCandle() {
+    candleFlames.forEach(f => f.style.opacity = 0);
+}
+
+function zoomToNumber() {
+    const overlay = document.getElementById("blackOverlay");
+
+    // Hitung diameter minimum supaya nutup diagonal layar
+    const diameter = Math.sqrt(window.innerWidth**2 + window.innerHeight**2) * 2;
+
+    overlay.style.width = diameter + "px";
+    overlay.style.height = diameter + "px";
+    overlay.style.transform = "translate(-50%, -50%) scale(3)";
+
+    // Setelah animasi selesai, pindah halaman
+    setTimeout(() => {
+        window.location.href = "Cihuy.html";
+    }, 1500);
+}
+
+cake.querySelectorAll(".candle").forEach(candle => {
+    candle.addEventListener("click", () => {
+        blowCandle(); // api padam
+        setTimeout(() => {
+            zoomToNumber(); // zoom ke angka
+            setTimeout(() => {
+                window.location.href = "Cihuy.html"; // ganti URL tujuan
+            }, 2000);
+        }, 2000);
+    });
+});
+</script>
+
+
+
+</body>
+</html>

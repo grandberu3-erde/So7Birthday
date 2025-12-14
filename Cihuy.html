@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/jpeg" href="/images/favico2.jpeg">
+<title>Main - Page </title>
+<style>
+body {
+    background-image: url('/images/background.jpeg'); 
+    background-repeat: no-repeat;
+    background-size: cover; 
+    background-position: center center;
+    min-height: 100vh; 
+    margin: 0; 
+    display: flex;
+    justify-content: center; 
+    align-items: center;     
+    font-family: Arial, sans-serif;
+    align-items: flex-start;
+}
+
+.container {
+    display: flex;
+    margin-top: 120px;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Navbar */
+.navbar {
+    display: flex;
+    justify-content: center;
+    gap: 150px;
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(10px);
+    padding: 15px 30px;
+    border-radius: 15px;
+    margin-bottom: 20px;
+    font-family: 'Comic Sans MS', cursive, sans-serif;
+    width: 800px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+}
+
+.navbar a {
+    text-decoration: none;
+    color: black;
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    cursor: pointer;
+    transition: color 0.3s, transform 0.3s;
+}
+
+.navbar a:hover {
+    color: #555;
+    transform: translateY(-2px);
+}
+
+/* Card Container */
+.card-container {
+    position: relative;
+    width: 800px;
+    height: 440px;
+    overflow: hidden;
+}
+
+/* Cards */
+.card {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.7); 
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    padding: 30px 40px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+    text-align: center;
+    transition: transform 0.5s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.card img {
+    max-width: 150px;
+    border-radius: 10px;
+    margin-bottom: 15px;
+}
+
+#aboutCard .photos {
+    width: 260px;    
+    max-width: none;   
+    border-radius: 15px;
+    object-fit: cover;
+}
+
+.card h2 {
+    margin: 10px 0;
+    font-size: 24px;
+    color: #333;
+}
+
+.card p {
+    color: #555;
+    line-height: 1.5;
+    margin: 6px 0;
+}
+
+/* Card aktif */
+.card.active {
+    transform: translateX(0);
+}
+
+/* Card tidak aktif (di kanan) */
+.card.inactive-right {
+    transform: translateX(100%);
+    
+}
+
+/* Card tidak aktif (di kiri) */
+.card.inactive-left {
+    transform: translateX(-100%);
+}
+
+.pas {
+    position: relative;
+    top: -10px;
+}
+
+.isi {
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 100px;
+}
+
+.teks {
+    text-align: left;
+    font-size: 20px;
+    font-family: 'Comic Sans MS', cursive, sans-serif;
+    font-weight: bold;
+    line-height: 1.0;
+}
+
+.teks p {
+    margin : 4px 0px;
+}
+
+.pesan p {
+    font-weight: bold;
+    text-align: center;
+    font-size: 20px;
+}
+
+.lagu p {
+    font-weight: bold;
+    text-align: center;
+    font-size: 20px;
+}
+
+#intro {
+    position: fixed;
+    inset: 0;
+    background: black;
+    z-index: 9999;
+
+    /* mulai layar penuh */
+    clip-path: circle(150% at 50% 50%);
+    animation: introAnim 1.4s ease-in-out forwards;
+}
+
+/* animasi mengecil jadi lingkaran */
+@keyframes introAnim {
+    0% {
+        clip-path: circle(150% at 50% 50%);
+    }
+    100% {
+        clip-path: circle(0% at 50% 50%);
+    }
+}
+
+</style>
+</head>
+<body>
+<div id="intro"></div>
+<div class="container">
+    <div class="pas">
+        <nav class="navbar">
+            <a onclick="showCard('about')"><span>❤️</span> About Sheyla</a>
+            <a onclick="showCard('fav')"><span>🎵</span> Lagu Song Bio Insta</a>
+            <a onclick="showCard('message')"><span>💬</span> Message</a>
+        </nav>
+
+        <div class="card-container">
+            <div class="card active" id="aboutCard">
+                <h2>About Sheyla❓</h2>
+                <div class="isi">
+                    <div class="photo">
+                        <img src="/images/images.jpeg" alt="hai" class="photos">
+                    </div>
+                    <div class="teks">
+                        <p>Nama : Sheyla</p>
+                        <p>Title : Duta so7 Stematel</p>
+                        <p>Kelas : X PPLG 2</p>
+                        <p>Sekolah : Esemka Telkom Purwokerto</p>
+                        <p>Hobi : Main Kucing, sama main gitar</p>
+                        <p>Minuman Favorit : Matcha</p>
+                        <p>Makanan Favorit : Gatau</p>
+                        <p>Username : @hauya</p>
+                    </div>
+                </div> 
+            </div> 
+
+            <div class="card inactive-right" id="favCard">
+                <h2>🎶Lagu Bio Insta</h2>
+                <img src="images/song.jpg" alt="Fav Song">
+                <div class="lagu">
+                    <p>Nama Lagu : Hands Up!(feat. Pixel Hood)</p>
+                <p>Artis : 6arelyhuman, kets4eki</p>
+                </div>
+            </div>
+
+            <div class="card inactive-right" id="messageCard">
+                <div class="pesan">
+                    <h2>📧Message pesan dari aku/gw</h2>
+                    <p>Sehat sehat orang sehat, baik baik orang baik😁, 
+                    <br>jangan pernah putus asa😎
+                    <br> jangan takut mencoba yaaa😊, 
+                    <br>  Semangat orang baik sehat sentosa Duta SO7 STEMATELLLL😏
+                    <br> +1 Shey, jadi orang baik terus yak😼
+                    <br> Sorry kalo ini website masih kurang menarik 🙏
+                    <br><br>
+                    <br> ~dari from Prabu suka menabung
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+const cardOrder = ['about','fav','message'];
+
+window.addEventListener('load', () => {
+    const intro = document.getElementById('intro');
+
+    setTimeout(() => {
+        intro.remove();
+    }, 1500); 
+});
+
+let current = 'about';
+
+function showCard(target) {
+    if(current === target) return;
+
+    const cards = {
+        'about': document.getElementById('aboutCard'),
+        'fav': document.getElementById('favCard'),
+        'message': document.getElementById('messageCard')
+    };
+
+    const currentCard = cards[current];
+    const nextCard = cards[target];
+
+    const currentIndex = cardOrder.indexOf(current);
+    const targetIndex = cardOrder.indexOf(target);
+
+    const direction = targetIndex > currentIndex ? 'right' : 'left';
+
+    currentCard.classList.remove('active');
+    currentCard.classList.add(direction === 'right' ? 'inactive-left' : 'inactive-right');
+
+    nextCard.classList.remove('inactive-left','inactive-right');
+    nextCard.classList.add(direction === 'right' ? 'inactive-right' : 'inactive-left');
+
+    nextCard.offsetHeight;
+
+    nextCard.classList.remove('inactive-left','inactive-right');
+    nextCard.classList.add('active');
+
+    current = target;
+}
+</script>
+</body>
+</html>
